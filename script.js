@@ -1,13 +1,18 @@
-function createGrid() {
+function createGrid(length) {
   const squares = [];
+  const gridSquares = length * length;
 
-  for (let i = 0; i < 256; i++) {
+  for (let i = 0; i < gridSquares; i++) {
     squares[i] = document.createElement("div");
-    squares[i].style.height = `${sketchPadPx / (Math.sqrt(256))}px`;
-    squares[i].style.width = `${sketchPadPx / (Math.sqrt(256))}px`;
+    squares[i].style.height = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
+    squares[i].style.width = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
     mainContainer.appendChild(squares[i]);
     squares[i].classList.add("square");
   }
+}
+
+function removeGrid() {
+  mainContainer.textContent = "";
 }
 
 const sketchPadPx = 600;
@@ -27,8 +32,10 @@ mainContainer.addEventListener("mouseout", (e) => {
 
 // Event listener to take user input
 promptBtn.addEventListener("click", () => {
+  removeGrid();
   gridLength = input.value;
   input.value = "";
+  createGrid(gridLength);
 });
 
-createGrid();
+createGrid(gridLength);
