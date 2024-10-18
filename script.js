@@ -10,3 +10,12 @@ function createGrid() {
 
 const mainContainer = document.querySelector(".main-container");
 createGrid();
+
+mainContainer.addEventListener("mouseover", (e) => {
+  e.target.style.backgroundColor = "black";
+  
+});
+
+mainContainer.addEventListener("mouseout", (e) => {
+  e.target.style.backgroundColor = "#E0E0E0";
+});
