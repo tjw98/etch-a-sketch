@@ -4,7 +4,7 @@ function createGrid() {
   for (let i = 0; i < 256; i++) {
     squares[i] = document.createElement("div");
     mainContainer.appendChild(squares[i]);
-    squares[i].classList.add(".square");
+    squares[i].classList.add("square");
   }
 }
 
