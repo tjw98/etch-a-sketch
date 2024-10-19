@@ -15,17 +15,30 @@ function removeGrid() {
   mainContainer.textContent = "";
 }
 
+function randomiseColor() {
+  const red = Math.floor(Math.random() * 257);
+  const green = Math.floor(Math.random() * 257);
+  const blue = Math.floor(Math.random() * 257);
+  return `RGB(${red}, ${green}, ${blue})`;
+}
+
 const sketchPadPx = 600;
 const mainContainer = document.querySelector(".main-container");
 const promptBtn = document.querySelector(".create-grid");
 const resetBtn = document.querySelector(".reset");
 const input = document.querySelector("input");
+const rainbow = document.querySelector("#rainbow");
+const opacity = document.querySelector("#opacity");
 let gridLength = 16;
 
 
 // Event listeners to change hover effect on grid
 mainContainer.addEventListener("mouseover", (e) => {
-  e.target.style.backgroundColor = "black";
+  if (rainbow.checked == true) {
+    e.target.style.backgroundColor = randomiseColor();
+  } else {
+    e.target.style.backgroundColor = "black";
+  }
 });
 
 // Event listener to take user input and change grid size
