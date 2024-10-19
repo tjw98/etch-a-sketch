@@ -33,3 +33,10 @@ body {
 .prompt-container > * {
   margin: 10px;
 }
+
+.additional-options {
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+  flex-basis: 100%;
+}
