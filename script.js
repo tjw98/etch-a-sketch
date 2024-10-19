@@ -26,11 +26,7 @@ mainContainer.addEventListener("mouseover", (e) => {
   e.target.style.backgroundColor = "black";
 });
 
-mainContainer.addEventListener("mouseout", (e) => {
-  e.target.style.backgroundColor = "#E0E0E0";
-});
-
-// Event listener to take user input
+// Event listener to take user input and change grid size
 promptBtn.addEventListener("click", () => {
   removeGrid();
   gridLength = input.value;
