@@ -22,6 +22,7 @@ const resetBtn = document.querySelector(".reset");
 const input = document.querySelector("input");
 let gridLength = 16;
 
+
 // Event listeners to change hover effect on grid
 mainContainer.addEventListener("mouseover", (e) => {
   e.target.style.backgroundColor = "black";
@@ -29,10 +30,15 @@ mainContainer.addEventListener("mouseover", (e) => {
 
 // Event listener to take user input and change grid size
 promptBtn.addEventListener("click", () => {
-  removeGrid();
-  gridLength = input.value;
-  input.value = "";
-  createGrid(gridLength);
+  // Limit size of grid to 100 x 100 for performance
+  if (input.value <= 100) {
+    removeGrid();
+    gridLength = input.value;
+    input.value = "";
+    createGrid(gridLength);
+  } else {
+    alert("Please limit grid size to 100 or less.");
+  }
 });
 
 resetBtn.addEventListener("click", () => {
