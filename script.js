@@ -17,7 +17,8 @@ function removeGrid() {
 
 const sketchPadPx = 600;
 const mainContainer = document.querySelector(".main-container");
-const promptBtn = document.querySelector("button");
+const promptBtn = document.querySelector(".create-grid");
+const resetBtn = document.querySelector(".reset");
 const input = document.querySelector("input");
 let gridLength = 16;
 
@@ -31,6 +32,11 @@ promptBtn.addEventListener("click", () => {
   removeGrid();
   gridLength = input.value;
   input.value = "";
+  createGrid(gridLength);
+});
+
+resetBtn.addEventListener("click", () => {
+  removeGrid();
   createGrid(gridLength);
 });
 
