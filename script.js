@@ -6,6 +6,7 @@ function createGrid(length) {
     squares[i] = document.createElement("div");
     squares[i].style.height = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
     squares[i].style.width = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
+    squares[i].setAttribute("data-count", "0");
     mainContainer.appendChild(squares[i]);
     squares[i].classList.add("square");
   }
@@ -16,10 +17,33 @@ function removeGrid() {
 }
 
 function randomiseColor() {
-  const red = Math.floor(Math.random() * 257);
-  const green = Math.floor(Math.random() * 257);
-  const blue = Math.floor(Math.random() * 257);
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
   return `RGB(${red}, ${green}, ${blue})`;
+}
+
+function drawOpaque(e) {
+  const shades = [
+  "#eeeeee",
+  "#cccccc",
+  "#aaaaaa",
+  "#888888",
+  "#666666",
+  "#444444",
+  "#333333",
+  "#222222",
+  "#111111",
+  "#000000" 
+  ];
+
+  e.target.dataset.count = parseInt(e.target.dataset.count) +1;
+  console.log(e.target.dataset.count);
+  for (let i = 0; i < shades.length; i++) {
+    if (parseInt(e.target.dataset.count) == i + 1) {
+      e.target.style.backgroundColor = shades[i];
+    }
+  }
 }
 
 const sketchPadPx = 600;
@@ -34,8 +58,16 @@ let gridLength = 16;
 
 // Event listeners to change hover effect on grid
 mainContainer.addEventListener("mouseover", (e) => {
+  if (opacity.checked == false) {
+    e.target.dataset.count = 0;
+  }
+  
   if (rainbow.checked == true) {
+    opacity.checked == false;
     e.target.style.backgroundColor = randomiseColor();
+  } else if (opacity.checked == true) {
+    rainbow.checked == false;
+    drawOpaque(e);
   } else {
     e.target.style.backgroundColor = "black";
   }
