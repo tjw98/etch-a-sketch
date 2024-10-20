@@ -4,8 +4,12 @@ function createGrid(length) {
 
   for (let i = 0; i < gridSquares; i++) {
     squares[i] = document.createElement("div");
+    
+    // Grid element width and height will always fit in sketchpad area
     squares[i].style.height = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
     squares[i].style.width = `${sketchPadPx / (Math.sqrt(gridSquares))}px`;
+    
+    // Custom data attribute added to track number of hover events
     squares[i].setAttribute("data-count", "0");
     mainContainer.appendChild(squares[i]);
     squares[i].classList.add("square");
@@ -37,8 +41,10 @@ function drawOpaque(e) {
   "#000000" 
   ];
 
+  // Increase data-count attribute on new mouseover event
   e.target.dataset.count = parseInt(e.target.dataset.count) +1;
-  console.log(e.target.dataset.count);
+  
+  // Incrementally darken sketchpad on each hover
   for (let i = 0; i < shades.length; i++) {
     if (parseInt(e.target.dataset.count) == i + 1) {
       e.target.style.backgroundColor = shades[i];
@@ -46,6 +52,8 @@ function drawOpaque(e) {
   }
 }
 
+// Initialise variables
+let gridLength = 16;
 const sketchPadPx = 600;
 const mainContainer = document.querySelector(".main-container");
 const promptBtn = document.querySelector(".create-grid");
@@ -53,7 +61,7 @@ const resetBtn = document.querySelector(".reset");
 const input = document.querySelector("input");
 const rainbow = document.querySelector("#rainbow");
 const opacity = document.querySelector("#opacity");
-let gridLength = 16;
+
 
 
 // Event listeners to change hover effect on grid
@@ -63,10 +71,8 @@ mainContainer.addEventListener("mouseover", (e) => {
   }
   
   if (rainbow.checked == true) {
-    opacity.checked == false;
     e.target.style.backgroundColor = randomiseColor();
   } else if (opacity.checked == true) {
-    rainbow.checked == false;
     drawOpaque(e);
   } else {
     e.target.style.backgroundColor = "black";
@@ -91,4 +97,5 @@ resetBtn.addEventListener("click", () => {
   createGrid(gridLength);
 });
 
+// Create initial grid on page load
 createGrid(gridLength);
